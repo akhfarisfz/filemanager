@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UploadController;
@@ -19,11 +20,7 @@ use App\Http\Controllers\UploadController;
 Route::get('/', function () {
     return view('Login');
 });
-Route::get('/home', function () {
-    return view('Home',[
-        "tittle"=> "Home"
-    ]);
-});
+
 Route::get('/login',[LoginController::class,'index']);
 Route::post('/login',[LoginController::class,'authenthicate']);
 
@@ -32,3 +29,7 @@ Route::post('/register',[RegisterController::class,'store']);
 
 Route::get('/upload', [UploadController::class, 'upload']);
 Route::post('/upload/proses', [UploadController::class, 'proses_upload']);
+
+Route::get('/home',[HomeController::class,'index']);
+
+
