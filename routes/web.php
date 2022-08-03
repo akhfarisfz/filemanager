@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::post('/login',[LoginController::class,'authenthicate']);
 
 Route::get('/register',[RegisterController::class,'index']);
 Route::post('/register',[RegisterController::class,'store']);
+
+Route::get('/upload', [UploadController::class, 'upload']);
+Route::post('/upload/proses', [UploadController::class, 'proses_upload']);
