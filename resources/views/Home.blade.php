@@ -42,6 +42,7 @@
 
     </style>
 @section('container')
+@csrf
 <div class="Navbar">
     <p>Drive</p>
     <span>
