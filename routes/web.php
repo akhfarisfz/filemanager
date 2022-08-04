@@ -28,7 +28,7 @@ Route::get('/register',[RegisterController::class,'index']);
 Route::post('/register',[RegisterController::class,'store']);
 
 Route::get('/upload', [UploadController::class, 'form']);
-Route::post('/upload', [UploadController::class, 'upload']) -> name('upload');
+Route::post('/upload', [UploadController::class, 'fileUpload']) -> name('fileUpload');
 
 Route::get('/home',function(){
     return view('Home',[
