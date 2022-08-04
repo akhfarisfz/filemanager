@@ -25,7 +25,9 @@ class RegisterController extends Controller
         // Avatar
         $path='data_file/';
         $fontPath= public_path('font/Roboto-Black.ttf');
-        $char =strtoupper($request->nama_user);
+        $char1 =strtoupper($request->nama_user);
+        $char=$char1[0];
+        // dd($char);
         $newAvatarname =rand(12,34353).time().'_avatar.png';
         $dest = $path.$newAvatarname;
 

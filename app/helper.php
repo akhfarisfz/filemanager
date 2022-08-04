@@ -10,7 +10,7 @@ if(!function_exists('makeAvatar')){
         $font = 'font/Roboto-Black.ttf';
         imagecolorallocate($image,$red,$green,$blue);
         $textcolor=imagecolorallocate($image,255,255,255);
-        imagettftext($image,100,0,50,150,$textcolor,$font,$char);
+        imagettftext($image,100,0,55,150,$textcolor,$font,$char);
         imagepng($image,$path);
         imagedestroy($image);
         return $path;
