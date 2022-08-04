@@ -7,10 +7,26 @@
             justify-content: space-between;
             width:100%;
             margin:10px;
-            /* padding:10px 50px 5px 25px; */
             border-bottom:1px outset;
             font-size:24px;
             font-weight: bold;
+        }
+        .Navbar span{
+            font-size: 16pt;
+            color: black;
+        }
+        .Navbar span a:link {
+            text-decoration: none;
+        }
+
+        .Navbar span a:visited {
+            text-decoration: none;
+        }
+        .Navbar span a:hover {
+            text-decoration: underline;
+        }
+        .Navbar span a:active {
+            text-decoration: underline;
         }
         .dropdown {
             position: relative;
@@ -42,12 +58,15 @@
 
     </style>
 @section('container')
-@csrf
+
 <div class="Navbar">
     <p>Drive</p>
     <span>
+        @auth
+        @csrf
         <div class="dropdown">
-            <a href="">
+            <a href=""> 
+                <span>Hello, {{ auth()->User()->nama_user }}</span>
                 <img src="/bxs_user-circle.png" width=40px>
             </a>
             <div class="dropdown-list">
@@ -55,6 +74,7 @@
                 <a href="/">Log out</a>
             </div>
         </div>
+        @endauth
     </span>
 </div>
 <div class="content">
