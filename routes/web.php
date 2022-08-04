@@ -37,4 +37,10 @@ Route::get('/home',function(){
     ]);
 })->middleware('auth');
 
+Route::get('/profil',function(){
+    return view('Profil',[
+        'tittle'=>'Profil'
+    ]);
+})->middleware('auth');
+
 

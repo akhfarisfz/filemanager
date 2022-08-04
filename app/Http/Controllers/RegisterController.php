@@ -22,6 +22,21 @@ class RegisterController extends Controller
             'konfirm' => 'min:6'
         ]);
 
+        // Avatar
+        $path='data_file/';
+        $fontPath= public_path('font/Roboto-Black.ttf');
+        $char1 =strtoupper($request->nama_user);
+        $char=$char1[0];
+        // dd($char);
+        $newAvatarname =rand(12,34353).time().'_avatar.png';
+        $dest = $path.$newAvatarname;
+
+        $createAvatar =makeAvatar($fontPath,$dest,$char);
+        $picture = $createAvatar == true? $newAvatarname:'';
+
+
+        
+        // dd($picture);
         User::create([
             'nama_user'=>$request->nama_user,
             'nip'=>$request->nip,
@@ -29,9 +44,9 @@ class RegisterController extends Controller
             'unitkerja'=>$request->unitkerja,
             'email'=>$request->email,
             'telepon'=>$request->telepon,
-            'password'=>Hash::make($request->password)
+            'password'=>Hash::make($request->password),
+            'picture'=>$picture
         ]);
-
         $request->session()->flash('success','Registrasi berhasil! Silahkan Login');
         
         return redirect('/');
