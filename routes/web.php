@@ -27,8 +27,8 @@ Route::post('/login',[LoginController::class,'authenthicate']);
 Route::get('/register',[RegisterController::class,'index']);
 Route::post('/register',[RegisterController::class,'store']);
 
-Route::get('/upload', [UploadController::class, 'upload']);
-Route::post('/upload/proses', [UploadController::class, 'proses_upload']);
+Route::get('/upload', [UploadController::class, 'form']);
+Route::post('/upload', [UploadController::class, 'upload']) -> name('upload');
 
 Route::get('/home',[HomeController::class,'index']);
 
