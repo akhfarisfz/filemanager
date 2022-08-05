@@ -81,9 +81,9 @@
             </div>
             <div class="modal-body">
                 <img src="data_file/{{ auth()->User()->picture }}" width=200px  style="border-radius: 50%;">
-                <label for="input-folder-3">Pilih Gambar</label>
+                {{-- <label for="input-folder-3">Pilih Gambar</label> --}}
                 <div class="file-loading">
-                    <input id="input-folder-3" name="input-folder-3[]" type="file" multiple>
+                    <input id="input-folder-3" name="input-folder-3" type="file" multiple>
                 </div>
                 <script>
                     $(document).ready(function () {
