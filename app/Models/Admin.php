@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class File extends Model
+class Admin extends Model
 {
     use HasFactory;
 
     public function folder(){
-        return $this->belongsTo(Folder::class);
+        return $this -> hasMany(Folder::class);
     }
-
-    protected $fillabel=[
-        'name',
-        'file_path'
-    ];
 }
