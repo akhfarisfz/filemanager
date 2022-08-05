@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -30,6 +31,7 @@ Route::post('/register',[RegisterController::class,'store']);
 Route::get('/upload', [UploadController::class, 'form']);
 Route::post('/upload', [UploadController::class, 'fileUpload']) -> name('fileUpload');
 
+Route::get('/fileHome', [FileController::class, 'index']);
 
 Route::get('/home',function(){
     return view('Home',[
