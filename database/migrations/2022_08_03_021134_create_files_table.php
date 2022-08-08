@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->string('file_path')->nullable();
+            $table->increments('id');
+            $table->string('file');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

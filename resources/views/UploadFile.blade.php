@@ -1,55 +1,64 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <title>File Upload</title>
-    <nav>
-        <div class="logo">
-            <a href="#">
-                <img src="/Group 3.png" style="width=auto">
-            </a>
-        </div>
-    </nav>
-    <style>
-        .container {
-            max-width: 500px;
-        }
-        dl, ol, ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-    </style>
+	<title>Upload File Kemendagri</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 
 </head>
 <body>
-    <div class="container mt-5">
-        <form action="{{route('fileUpload')}}" method="post" enctype="multipart/form-data">
-          <h3 class="text-center mb-5">Upload File</h3>
-            @csrf
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <strong>{{ $message }}</strong>
-            </div>
-          @endif
-          @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-          @endif
-            <div class="custom-file">
-                <input type="file" name="file" class="custom-file-input" id="chooseFile">
-                <label class="custom-file-label" for="chooseFile">Select file</label>
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
-                Upload Files
-            </button>
-        </form>
-    </div>
+	<div class="row">
+		<div class="container">
+ 
+			<h2 class="text-center my-5">Upload File Here</h2>
+			
+			<div class="col-lg-8 mx-auto my-5">	
+ 
+				@if(count($errors) > 0)
+				<div class="alert alert-danger">
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br/>
+					@endforeach
+				</div>
+				@endif
+ 
+				<form action="/upload/proses" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+ 
+					<div class="form-group">
+						<b>File</b><br/>
+						<input type="file" name="file">
+					</div>
+ 
+					<div class="form-group">
+						<b>Keterangan</b>
+						<textarea class="form-control" name="keterangan"></textarea>
+					</div>
+ 
+					<input type="submit" value="Upload" class="btn btn-primary">
+				</form>
+				
+				<h4 class="my-5">Data</h4>
+ 
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th width="1%">File</th>
+							<th>Keterangan</th>
+							<th width="1%">OPSI</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($files as $f)
+						<tr>
+							<td><img width="150px" src="{{ url('/data_file/'.$f->file) }}"></td>
+							<td>{{$f->keterangan}}</td>
+							<td><a class="btn btn-danger" href="/upload/hapus/{{ $f->id }}">HAPUS</a></td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

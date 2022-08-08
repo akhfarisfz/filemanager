@@ -28,8 +28,9 @@ Route::post('/login',[LoginController::class,'authenthicate']);
 Route::get('/register',[RegisterController::class,'index']);
 Route::post('/register',[RegisterController::class,'store']);
 
-Route::get('/upload', [UploadController::class, 'form']);
-Route::post('/upload', [UploadController::class, 'fileUpload']) -> name('fileUpload');
+Route::get('/upload', [UploadController::class, 'index']);
+Route::post('/upload/proses',[UploadController::class, 'upload']);
+Route::get('/upload/hapus/{id}',[UploadController::class, 'hapus']);
 
 Route::get('/fileHome', [FileController::class, 'index']);
 
