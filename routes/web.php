@@ -34,11 +34,9 @@ Route::get('/upload/hapus/{id}',[UploadController::class, 'hapus']);
 
 Route::get('/fileHome', [FileController::class, 'index']);
 
-Route::get('/home',function(){
-    return view('Home',[
-        'tittle'=>'Home'
-    ]);
-})->middleware('auth');
+Route::get('/home',[HomeController::class,'folder'])->middleware('auth');
+
+Route::get('/folder',[HomeController::class,'folder2'])->middleware('auth');
 
 Route::get('/profil',function(){
     return view('Profil',[

@@ -8,7 +8,7 @@
             margin: 5px;
             padding: 5px 50px 0 25px;
             border-bottom: 1px outset;
-            font-size: 16 px;
+            font-size: 16px;
             font-weight: bold;
         }
 

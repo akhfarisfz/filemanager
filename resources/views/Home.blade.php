@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
     <style>
-         
         .Navbar{
             display: flex;
             justify-content: space-between;
@@ -56,6 +55,12 @@
         .dropdown:hover .dropdown-list {display: block;}
         .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+        .content{
+            padding: 10px;
+        }
+        .content{
+            border-bottom: 1px solid black;
+        }
     </style>
 @section('container')
 
@@ -77,22 +82,23 @@
         @endauth
     </span>
 </div>
-<div class="content">
-    <a href="/homeFile">
-        <img src="/image 4.png" width=40px>
-        <span> 2021</span>
-    </a>
-</div>
-<div class="content">
-    <a href="/homeFile">
-        <img src="/image 4.png" width=40px>
-        <span> 2022</span>
-    </a>
-</div>
-<div class="content">
-    <a href="/homeFile">
-        <img src="/image 4.png" width=40px>
-        <span> 2023</span>
-    </a>
-</div>
+@php    
+    $directories = array_map('basename', Storage::directories('public'));
+    $directorySelect = array();
+        foreach( $directories as $directory ) :
+        $directorySelect[$directory] = $directory;
+        endforeach; 
+@endphp
+@foreach ($directories as $directory)
+    @php
+        $directorySelect[$directory] = $directory;
+    @endphp 
+    <div class="content">
+        <a href="folder">
+            <img src="/image 4.png" width=40px>
+            <span>{{ $directory }}</span>
+        </a>
+    </div>
+@endforeach
+
 @endsection
