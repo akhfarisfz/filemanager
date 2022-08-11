@@ -14,12 +14,8 @@ class HomeController extends Controller
     }
     
     public function folder(){
-    
-        
         $directories = array_map('basename', Storage::directories('public'));
-        // dd($directories[]);
-        
-        
+        // dd($directories);
         return view('Home',[
             "tittle"=> "Home"
         ]);

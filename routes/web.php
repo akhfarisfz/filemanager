@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Usermanagement;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,17 @@ Route::get('/profil',function(){
 })->middleware('auth');
 
 
+
+//Admin
+Route::get('/admin',function(){
+    return view('Admin.Home',[
+        'tittle'=>'AdminHome'
+    ]);
+});
+
+Route::get('/usermanagement',function(){
+    return view('Admin/Usermanagement',[
+        'tittle'=>'User',
+    ]);
+});
+//,[Usermanagement::class,'index']
