@@ -88,8 +88,6 @@
                     <img src="logo-kemendagri.png" width="60%" class="center">
                     <h3 align="center">Sistem File Manager</h3>
                     <h4 align="center">Kementerian Dalam Negeri</h4>
-                    
-
                 </div>
             </div>
         </div>

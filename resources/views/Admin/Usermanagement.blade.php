@@ -2,7 +2,8 @@
 @section('container')
 @php
 $users = App\Models\User::all();
-
+$folder= array_map('basename',Storage::directories('public/2019'));
+// dd($folder);
 @endphp
 <div class="card-deck p-2 mx-auto">
 <?php
@@ -12,12 +13,10 @@ $users = App\Models\User::all();
         <div class="card-img-top mx-auto d-block" style="width: 17rem;">
             <img src="data_file/{{ $users[$i]->picture;}}" class="card-img-top" alt="image-cap">
             <div class="card-body text-center">
-                {{-- dd($item); --}}
                 <h5 class="card-title">{{ $users[$i]->nama_user; }}</h5>
             </div>
         </div>
     </a>
-    {{-- <span> </span> --}}
 <?php
     }
     ?>
@@ -25,15 +24,16 @@ $users = App\Models\User::all();
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
               <h4 class="modal-title">Modal Header</h4>
             </div>
             <div class="modal-body">
                 <div class="form-check">
+                  @foreach ($folder as $item)    
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">
-                      Default checkbox
+                      {{$item}}
                     </label>
+                  @endforeach
                   </div>
             </div>
             <div class="modal-footer">

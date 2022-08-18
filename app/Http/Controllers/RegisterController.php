@@ -33,10 +33,6 @@ class RegisterController extends Controller
 
         $createAvatar =makeAvatar($fontPath,$dest,$char);
         $picture = $createAvatar == true? $newAvatarname:'';
-
-
-        
-        // dd($picture);
         User::create([
             'nama_user'=>$request->nama_user,
             'nip'=>$request->nip,
