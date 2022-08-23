@@ -2,7 +2,7 @@
 @section('container')
 <div class="d-flex justify-content-around">
     <div class="card text-center" style="width:40%">
-        <a href="" class="stretched-link">
+        <a href="/managementfile" class="stretched-link">
             <img class="card-img-top" src="/image 35.png" alt="Card image"  style="width:50%">
             <p>Manajemen Folder</p>
         </a>

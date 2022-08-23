@@ -14,7 +14,6 @@ if(!function_exists('makeAvatar')){
         imagepng($image,$path);
         imagedestroy($image);
         return $path;
-
     }
 }
 

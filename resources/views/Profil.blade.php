@@ -80,19 +80,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="data_file/{{ auth()->User()->picture }}" width=200px  style="border-radius: 50%;">
-                {{-- <label for="input-folder-3">Pilih Gambar</label> --}}
-                <div class="file-loading">
-                    <input id="input-folder-3" name="input-folder-3" type="file" multiple>
-                </div>
+                <form action="/update" method="post">
+                    <img src="data_file/{{ auth()->User()->picture }}" width=200px height=200px style="border-radius: 50%;" id="preview-image-before-upload">
+                    <div class="file-loading">
+                        <input type="file" name="image" id="image" name="image" type="image" multiple onchange="previewImage()" @error('image') is-invalid @enderror>
+                            @error('image')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                            @enderror
+                    </div>
+                
                 <script>
-                    $(document).ready(function () {
-                        $("#input-folder-3").fileinput({
-                            uploadUrl: "/file-upload-batch/2",
-                            hideThumbnailContent: true // hide image, pdf, text or other content in the thumbnail preview
+                    $(document).ready(function (e) {
+                        $('#image').change(function(){ 
+                        let reader = new FileReader();
+                        reader.onload = (e) => { 
+                            $('#preview-image-before-upload').attr('src', e.target.result); 
+                        }
+                        reader.readAsDataURL(this.files[0]); 
                         });
                     });
+   
                 </script>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

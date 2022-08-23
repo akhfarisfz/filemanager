@@ -7,6 +7,7 @@ use App\Http\Controllers\Usermanagement;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\FileManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::post('/register',[RegisterController::class,'store']);
 
 Route::get('/file', [FileController::class, 'index']);
 Route::post('/file/upload',[FileController::class, 'upload']);
+
 Route::get('/file/hapus/{id}',[FileController::class, 'hapus']);
 Route::get('/file/unduh/{id}',[FileController::class, 'unduh']);
 
@@ -60,4 +62,10 @@ Route::get('/usermanagement',function(){
         'tittle'=>'User',
     ]);
 });
-//,[Usermanagement::class,'index']
+
+
+Route::get('/managementfile',[FileManagementController::class,'index']);
+
+Route::get('/Files/{parent_id?}',[FileManagementController::class,'index']);
+Route::post('/Files/{parent_id?}',[FileManagementController::class,'tambahfolder']);
+

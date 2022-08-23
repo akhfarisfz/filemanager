@@ -30,7 +30,7 @@
     </nav>
 </head>
 <body>
-    <div class="container p-3 my-3 border">
+    <div class="container p-3 my-3 ">
         @yield('container')
     </div>
 </body>

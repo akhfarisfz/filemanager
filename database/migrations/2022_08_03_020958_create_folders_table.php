@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('folders', function (Blueprint $table) {
-            $table->increments('id_folder');
+            $table->id();
             $table->string('nama_folder');
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable();
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+
         });
     }
 
