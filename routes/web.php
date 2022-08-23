@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Usermanagement;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\FileManagementController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,15 +53,23 @@ Route::get('/profil',function(){
 
 
 //Admin
-Route::get('/admin',function(){
-    return view('Admin.Home',[
-        'tittle'=>'AdminHome'
-    ]);
-});
+Route::get('/admin/home', [AdminController::class, 'index']);
+//User
+Route::get('/user/home', [UserController::class, 'index']);
 
 Route::get('/usermanagement',function(){
     return view('Admin/Usermanagement',[
         'tittle'=>'User',
     ]);
 });
-//,[Usermanagement::class,'index']
+
+
+Route::get('/managementfile',[FileManagementController::class,'index']);
+
+Route::get('/Files/{parent_id?}',[FileManagementController::class,'index']);
+Route::post('/Files/{parent_id?}',[FileManagementController::class,'tambahfolder']);
+
+Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
+
+Route :: get('/gate',[AuthorizationController::class,'index'])->name('gate.index')->middleware('can:isAdmin');
+
