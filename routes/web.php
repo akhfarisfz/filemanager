@@ -1,13 +1,15 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserManagementController;
+use App\Http\Controllers\AuthorizationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Usermanagement;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UploadController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\FileManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +38,6 @@ Route::post('/file/upload',[FileController::class, 'upload']);
 Route::get('/file/hapus/{id}',[FileController::class, 'hapus']);
 Route::get('/file/unduh/{id}',[FileController::class, 'unduh']);
 
-Route::get('/fileHome', [FileController::class, 'index']);
-
 Route::get('/home',[HomeController::class,'folder'])->middleware('auth');
 
 Route::get('/folder',[HomeController::class,'folder2'])->middleware('auth');
@@ -62,10 +62,4 @@ Route::get('/usermanagement',function(){
         'tittle'=>'User',
     ]);
 });
-
-
-Route::get('/managementfile',[FileManagementController::class,'index']);
-
-Route::get('/Files/{parent_id?}',[FileManagementController::class,'index']);
-Route::post('/Files/{parent_id?}',[FileManagementController::class,'tambahfolder']);
-
+//,[Usermanagement::class,'index']
