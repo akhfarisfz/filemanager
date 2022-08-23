@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserManagementController;
+use App\Http\Controllers\AuthorizationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Usermanagement;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UploadController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +38,6 @@ Route::post('/file/upload',[FileController::class, 'upload']);
 Route::get('/file/hapus/{id}',[FileController::class, 'hapus']);
 Route::get('/file/unduh/{id}',[FileController::class, 'unduh']);
 
-Route::get('/fileHome', [FileController::class, 'index']);
-
 Route::get('/home',[HomeController::class,'folder'])->middleware('auth');
 
 Route::get('/folder',[HomeController::class,'folder2'])->middleware('auth');
@@ -49,15 +51,10 @@ Route::get('/profil',function(){
 
 
 //Admin
-Route::get('/admin',function(){
-    return view('Admin.Home',[
-        'tittle'=>'AdminHome'
-    ]);
-});
+Route::get('/admin/home', [AdminController::class, 'index']);
+//User
+Route::get('/user/home', [UserController::class, 'index']);
 
-Route::get('/usermanagement',function(){
-    return view('Admin/Usermanagement',[
-        'tittle'=>'User',
-    ]);
-});
-//,[Usermanagement::class,'index']
+Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
+
+Route :: get('/gate',[AuthorizationController::class,'index'])->name('gate.index')->middleware('can:isAdmin');
