@@ -60,6 +60,8 @@
         }
         .content{
             border-bottom: 1px solid black;
+            display: flex;
+            /* justify-content: space-between;  */
         }
     </style>
 @section('container')
@@ -72,33 +74,48 @@
         <div class="dropdown">
             <a href=""> 
                 <span>Hello, {{ auth()->User()->nama_user }}</span>
-                <img src="/bxs_user-circle.png" width=40px>
+                <img src="/data_file/{{ auth()->User()->picture }}" width=40px style="border-radius: 50%;">
             </a>
             <div class="dropdown-list">
                 <a href="/profil">Edit Profil</a>
-                <a href="/">Log out</a>
+                <a href="/logout">Log out</a>
             </div>
         </div>
         @endauth
     </span>
 </div>
-@php    
-    $directories = array_map('basename', Storage::directories('public'));
-    $directorySelect = array();
-        foreach( $directories as $directory ) :
-        $directorySelect[$directory] = $directory;
-        endforeach; 
-@endphp
-@foreach ($directories as $directory)
-    @php
-        $directorySelect[$directory] = $directory;
-    @endphp 
-    <div class="content">
-        <a href="folder">
-            <img src="/image 4.png" width=40px>
-            <span>{{ $directory }}</span>
-        </a>
-    </div>
-@endforeach
 
+@foreach ($data as $folder)
+<a href="/home/{{ $folder['id']}}">  
+<div class="content"> 
+        <img src="/image 4.png" width=45px>
+        <span>{{ $folder['nama_folder'] }}</span>
+        {{-- <span>{{ $ }}</span> --}}
+    </div>
+</a>
+@endforeach
+<div class="data">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th width = "1%">FILE</th>
+          <th>KETERANGAN</th>	
+          <th width = "1%">OPSI</th>
+        </tr>
+      </thead>
+      {{-- @foreach ($data as $item)           --}}
+      <tbody>
+        <tr>
+          <td>File</td>
+          <td>Keterangan</td>
+          <td>
+            <div class="btn-group" >
+              <a class="btn btn-danger" href=""><span>HAPUS</span></a>
+              <a class="btn btn-success" href=""><span>UNDUH</span></a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      {{-- @endforeach --}}
+    </table>
 @endsection

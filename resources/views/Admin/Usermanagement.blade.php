@@ -2,16 +2,16 @@
 @section('container')
 @php
 $users = App\Models\User::all();
-$folder= array_map('basename',Storage::directories('public/2019'));
+// $folder= array_map('basename',Storage::directories('public/2019'));
 @endphp
 <div class="card-deck p-2 mx-auto">
   <?php
     for ($i=0; $i < count($users); $i++) {
 ?>
   <a href="" data-toggle="modal" data-target="#myModal">
-    <div class="card-img-top mx-auto d-block" style="width: 17rem;">
+    <div class="card-img-top mx-auto d-block" style="width: 17rem;border:1pt solid grey;">
       <img src="data_file/{{ $users[$i]->picture;}}" class="card-img-top" alt="image-cap">
-      <div class="card-body text-center">
+      <div class="card-body text-center" style="border:1pt solid grey;">
         <h5 class="card-title">{{ $users[$i]->nama_user; }}</h5>
       </div>
     </div>
@@ -26,14 +26,7 @@ $folder= array_map('basename',Storage::directories('public/2019'));
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <div class="form-check">
-            @foreach ($folder as $item)
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              {{$item}}
-            </label>
-            @endforeach
-          </div>
+          Ini mOdal
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

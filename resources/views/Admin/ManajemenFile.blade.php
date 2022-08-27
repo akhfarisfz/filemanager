@@ -1,14 +1,6 @@
 @extends('Admin.Layout.index')
 @section('container')
 
-@php 
-use App\Models\Folder;
-$directories = array_map('basename', Storage::directories('public'));
-$directorySelect = array();
-    foreach( $directories as $directory ) :
-    $directorySelect[$directory] = $directory;
-    endforeach; 
-@endphp
   <a href="" data-toggle="modal" data-target="#myModal">
     <div class="card-text-right" style="width: 17rem;">
         <img src="/fluent_folder-add-48-filled.png" width="35px">
@@ -22,7 +14,7 @@ $directorySelect = array();
         </div>
         <div class="modal-body">
           <div class="row align-items-center">
-            <form action="<?php echo url("/Files/{$parent_id}"); ?>" method="post">
+            <form action="<?php echo url("/managementfile/{$parent_id}"); ?>" method="post">
               @csrf
               <div class="form-group">
                 <label for="nama_folder">Nama_Folder</label>
@@ -45,22 +37,69 @@ $directorySelect = array();
     </div>
   </div>
 @foreach ($data as $folder)
-@php
-    $directorySelect[$directory] = $directory;
-@endphp 
-  
 <div class="content"> 
-    <a href="/Files/{{ $folder['id']}}">  
+    <a href="/managementfile/{{ $folder['id']}}">  
         <img src="/image 4.png" width=45px>
         <span>{{ $folder['nama_folder'] }}</span>
+        {{-- Tambah Folder Modal --}}
         <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src="/dots.png" width="20px">
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Rename</a>
-          <a class="dropdown-item" href="#">Delete</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal">Rename</a>
+          <a class="dropdown-item" href="/managementfile/delete/{{ $folder['id'] }}">Delete</a>
         </div>
     </a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Rename</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/managementfile/rename/{{ $folder['id'] }}" method="post">
+        @csrf
+      <div class="modal-body">
+          <label for="nama_folder">Nama Folder</label>
+          <input type="text" name="nama_folder" class="form-control" id="nama_folder" required >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+@endforeach
+
+<div class="data">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th width = "1%">FILE</th>
+        <th>KETERANGAN</th>	
+        <th width = "1%">OPSI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>File</td>
+        <td>Keterangan</td>
+        <td>
+          <div class="btn-group" >
+            <a class="btn btn-danger" href=""><span>HAPUS</span></a>
+            <a class="btn btn-success" href=""><span>UNDUH</span></a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <style>
     .content{
@@ -74,5 +113,4 @@ $directorySelect = array();
     }
 </style>
 
-@endforeach
 @endsection

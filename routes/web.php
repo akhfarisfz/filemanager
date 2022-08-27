@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\AdminCategoryController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminUserManagementController;
-use App\Http\Controllers\AuthorizationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Usermanagement;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Usermanagement;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AuthorizationController;
+use App\Http\Controllers\FileManagementController;
+use App\Http\Controllers\AdminUserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,8 @@ Route::get('/file/unduh/{id}',[FileController::class, 'unduh']);
 
 Route::get('/home',[HomeController::class,'folder'])->middleware('auth');
 
-Route::get('/folder',[HomeController::class,'folder2'])->middleware('auth');
+Route::get('/home/{parent_id?}',[HomeController::class,'folder'])->middleware('auth');
+Route::get('/logout',[HomeController::class,'logout'])->middleware('auth');
 
 Route::get('/profil',function(){
     return view('Profil',[
@@ -51,7 +53,13 @@ Route::get('/profil',function(){
 })->middleware('auth');
 
 
+Route::post('/update',[ProfileController::class,'update']);
 
+
+
+
+
+//ADMIN
 //Admin
 Route::get('/admin/home', [AdminController::class, 'index']);
 //User
@@ -66,8 +74,11 @@ Route::get('/usermanagement',function(){
 
 Route::get('/managementfile',[FileManagementController::class,'index']);
 
-Route::get('/Files/{parent_id?}',[FileManagementController::class,'index']);
-Route::post('/Files/{parent_id?}',[FileManagementController::class,'tambahfolder']);
+Route::get('/managementfile/{parent_id?}',[FileManagementController::class,'index']);
+Route::post('/managementfile/{parent_id?}',[FileManagementController::class,'tambahfolder']);
+
+Route::get('/managementfile/delete/{id}',[FileManagementController::class,'hapusfolder']);
+Route::post('/managementfile/rename/{id}',[FileManagementController::class,'rename']);
 
 Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
 

@@ -79,11 +79,6 @@
                         <p>Regist?<span><a href="/register">Daftar</a></span></p>
                     </form>
                 </div>
-            {{-- </div>
-            <div class="row align-items-center"> --}}
-                {{-- <div class="col-md-auto" style="padding:10px;">
-                  <img src="Line 19.png" width="3px">
-                </div> --}}
                 <div class="col" style="10px 150px;align:center ">
                     <img src="logo-kemendagri.png" width="60%" class="center">
                     <h3 align="center">Sistem File Manager</h3>

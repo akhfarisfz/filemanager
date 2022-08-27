@@ -2,55 +2,53 @@
 
 <style>
     .Navbar {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin: 5px;
-            padding: 5px 50px 0 25px;
-            border-bottom: 1px outset;
-            font-size: 16px;
-            font-weight: bold;
-        }
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: 5px;
+        padding: 5px 50px 0 25px;
+        border-bottom: 1px outset;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
-        .judul {
-            background: rgba(9, 30, 217, 0.32);
-            padding: 15px;
-            text-align: center;
-            color: rgba(0, 0, 94, 1);
-            font-weight: bold;
-        }
+    .judul {
+        background: rgba(9, 30, 217, 0.32);
+        padding: 15px;
+        text-align: center;
+        color: rgba(0, 0, 94, 1);
+        font-weight: bold;
+    }
 
-        .container {
-            margin-top: 10px;
-            padding: 15px;
-            text-align: center;
-        }
+    .container {
+        margin-top: 10px;
+        padding: 15px;
+        text-align: center;
+    }
 
-        .container img {
-            border: 1pt black;
-            padding: 20px;
-        }
+    .container img {
+        border: 1pt black;
+        padding: 20px;
+    }
 
-        .container button {
-            align: center;
-        }
+    .container button {
+        align: center;
+    }
 
-        table,
-        th,
-        td {
-            border: 1px solid white;
-        }
+    table,
+    th,
+    td {
+        border: 1px solid white;
+    }
 
-        table {
-            border: none;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-            border: none;
-        }
-            
-       
-    </style>
+    table {
+        border: none;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        border: none;
+    }
+</style>
 @section('container')
 <div class="Navbar">
     <p>Profil</p>
@@ -79,34 +77,37 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="/update" method="post">
-                    <img src="data_file/{{ auth()->User()->picture }}" width=200px height=200px style="border-radius: 50%;" id="preview-image-before-upload">
+            <form action="/update" enctype="multipart/form-data" method="post">
+                @csrf
+                <div class="modal-body">
+                    <img src="data_file/{{ auth()->User()->picture }}" width=200px
+                        style="border-radius: 50%;" id="preview-image-before-upload">
                     <div class="file-loading">
-                        <input type="file" name="image" id="image" name="image" type="image" multiple onchange="previewImage()" @error('image') is-invalid @enderror>
-                            @error('image')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                            @enderror
+                        <input type="file" name="image" id="image" name="image" type="image" multiple
+                            onchange="previewImage()" >
+                            {{-- @error('image') is-invalid @enderror>
+                        @error('image')
+                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                        @enderror --}}
                     </div>
-                
-                <script>
-                    $(document).ready(function (e) {
-                        $('#image').change(function(){ 
-                        let reader = new FileReader();
-                        reader.onload = (e) => { 
-                            $('#preview-image-before-upload').attr('src', e.target.result); 
-                        }
-                        reader.readAsDataURL(this.files[0]); 
+                    <script>
+                        $(document).ready(function (e) {
+                            $('#image').change(function () {
+                                let reader = new FileReader();
+                                reader.onload = (e) => {
+                                    $('#preview-image-before-upload').attr('src', e.target.result);
+                                }
+                                reader.readAsDataURL(this.files[0]);
+                            });
                         });
-                    });
-   
-                </script>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                    </script>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>

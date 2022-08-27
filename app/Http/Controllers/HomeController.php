@@ -2,29 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Folder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
-        
-        
-    }
     
-    public function folder(){
-        $directories = array_map('basename', Storage::directories('public'));
-        // dd($directories);
+    public function folder($parent_id=null){
+        $folders = Folder::where('parent_id', $parent_id)->get()->sortBy("nama_folder");
+
         return view('Home',[
-            "tittle"=> "Home"
-        ]);
+            'parent_id'=>$parent_id,
+            'tittle'=>"Home",
+            'data'=>$folders
+            ]);
     }
-    
-    public function folder2(){
-       
-        return view('access',[
-            "tittle"=> "Access Folder",
-        ]);
+
+    public function logout(){
+        Auth::logout();
+        return redirect('/');
     }
 }
