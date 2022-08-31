@@ -118,4 +118,52 @@
       </tbody>
       {{-- @endforeach --}}
     </table>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Upload File
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-8 mx-auto my-5">	
+  
+            @if(count($errors) > 0)
+            <div class="alert alert-danger">
+              @foreach ($errors->all() as $error)
+              {{ $error }} <br/>
+              @endforeach
+            </div>
+            @endif
+      
+            <form action="/file/upload" method="POST" enctype="multipart/form-data">
+              {{ csrf_field() }}
+      
+              <div class="form-group">
+                <b>File</b><br/>
+                <input type="file" name="file">
+              </div>
+      
+              <div class="form-group">
+                <b>Keterangan</b>
+                <textarea class="form-control" name="keterangan"></textarea>
+              </div>
+      
+              <input type="submit" value="Upload" class="btn btn-primary">
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

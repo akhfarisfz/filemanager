@@ -22,7 +22,7 @@ class FileController extends Controller
         // menyimpan data file yang diupload ke variabel $file
         $file = $request->file('file');
     
-        $nama_file = time()."_".$file->getClientOriginalName();
+        $nama_file = $file->getClientOriginalName();
  
       	// isi dengan nama folder tempat kemana file diupload
         $tujuan_upload = 'data_file';

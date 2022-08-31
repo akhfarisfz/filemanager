@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email',60)->unique();
             $table->string('telepon', 60);
             $table->string('password', 60);
-            // $table->enum('role', ['user','admin']);
+            $table->enum('role', ['user','admin'])->default('user');
             // $table->rememberToken();
             $table->string('picture')->nullable();
             $table->timestamp('created_at')->useCurrent();

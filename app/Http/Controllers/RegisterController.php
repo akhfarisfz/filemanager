@@ -40,6 +40,7 @@ class RegisterController extends Controller
             'unitkerja'=>$request->unitkerja,
             'email'=>$request->email,
             'telepon'=>$request->telepon,
+            'role'=>'admin',
             'password'=>Hash::make($request->password),
             'picture'=>$picture
         ]);
