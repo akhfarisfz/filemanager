@@ -61,7 +61,7 @@ Route::post('/update',[ProfileController::class,'update']);
 
 //ADMIN
 //Admin
-Route::get('/admin/home', [AdminController::class, 'index']);
+Route::get('/admin/home', [AdminController::class, 'index'])->middleware('auth');
 //User
 Route::get('/user/home', [UserController::class, 'index']);
 
@@ -79,6 +79,7 @@ Route::post('/managementfile/rename/{id}',[FileManagementController::class,'rena
 Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
 // Route::resource('/admin/usermanagement', AdminUserManagementController::class,'akeses')->except('show')->middleware('auth');
 // Route::get('/admin/')
+Route::get('/logout',[HomeController::class,'logout'])->middleware('auth');
 
 Route :: get('/gate',[AuthorizationController::class,'index'])->name('gate.index')->middleware('can:isAdmin');
 
