@@ -79,11 +79,52 @@
 </div>
 <div class="row">
 	<div class="container">
-
-		<h2 class="text-center my-5">Upload File Here</h2>
 		
 		<div class="col-lg-8 mx-auto my-5">	
+			<h4 class="my-5">Data</h4>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th width = "25%">FILE</th>
+						<th>KETERANGAN</th>	
+						<th width = "1%">OPSI</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($files as $f)
+					<tr>
+						<td>{{ ($f->file) }}</td>
+						<td>{{$f->keterangan}}</td>
+						<td>
+							<div class="btn-group" >
+								<a class="btn btn-danger" href="/file/hapus/{{ $f->id }}"><span>HAPUS</span></a>
+								<a class="btn btn-success" href="/file/unduh/{{ $f->id }}"><span>UNDUH</span></a>
+							</div>
+						</td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+	Upload File
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Upload Here</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
 			@if(count($errors) > 0)
 			<div class="alert alert-danger">
 				@foreach ($errors->all() as $error)
@@ -107,32 +148,11 @@
 
 				<input type="submit" value="Upload" class="btn btn-primary">
 			</form>
-			
-			<h4 class="my-5">Data</h4>
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th width = "1%">FILE</th>
-						<th>KETERANGAN</th>	
-						<th width = "1%">OPSI</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($files as $f)
-					<tr>
-						<td>{{ ($f->file) }}</td>
-						<td>{{$f->keterangan}}</td>
-						<td>
-							<div class="btn-group" >
-								<a class="btn btn-danger" href="/file/hapus/{{ $f->id }}"><span>HAPUS</span></a>
-								<a class="btn btn-success" href="/file/unduh/{{ $f->id }}"><span>UNDUH</span></a>
-							</div>
-						</td>
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
 		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
 	</div>
-</div>
+  </div>
 @endsection
