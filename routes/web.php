@@ -79,6 +79,7 @@ Route::post('/managementfile/rename/{id}',[FileManagementController::class,'rena
 Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
 // Route::resource('/admin/usermanagement', AdminUserManagementController::class,'akeses')->except('show')->middleware('auth');
 // Route::get('/admin/')
+Route::get('/adminlogout',[AdminController::class,'logout'])->middleware('auth');
 
 Route :: get('/gate',[AuthorizationController::class,'index'])->name('gate.index')->middleware('can:isAdmin');
 

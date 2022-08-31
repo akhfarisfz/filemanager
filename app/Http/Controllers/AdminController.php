@@ -12,4 +12,8 @@ class AdminController extends Controller
         'tittle'=>'Admin',
         ]);
     }
+    public function adminlogout(){
+        Auth::logout();
+        return redirect('/');
+    }
 }
