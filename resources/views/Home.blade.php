@@ -65,11 +65,11 @@
         }
     </style>
 @section('container')
+@auth
 
 <div class="Navbar">
     <p>Drive</p>
     <span>
-        @auth
         @csrf
         <div class="dropdown">
             <a href=""> 
@@ -81,15 +81,14 @@
                 <a href="/logout">Log out</a>
             </div>
         </div>
-        @endauth
     </span>
 </div>
-
-@foreach ($data as $folder)
-<a href="/home/{{ $folder['id']}}">  
+@foreach ($data_akses as $folder)
+    
+<a href="/home/{{ $folder->id}}">  
 <div class="content"> 
         <img src="/image 4.png" width=45px>
-        <span>{{ $folder['nama_folder'] }}</span>
+        <span>{{ $folder->nama_folder }}</span>
         {{-- <span>{{ $ }}</span> --}}
     </div>
 </a>
@@ -103,7 +102,6 @@
           <th width = "1%">OPSI</th>
         </tr>
       </thead>
-      {{-- @foreach ($data as $item)           --}}
       <tbody>
         <tr>
           <td>File</td>
@@ -116,54 +114,6 @@
           </td>
         </tr>
       </tbody>
-      {{-- @endforeach --}}
     </table>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Upload File
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="col-lg-8 mx-auto my-5">	
-  
-            @if(count($errors) > 0)
-            <div class="alert alert-danger">
-              @foreach ($errors->all() as $error)
-              {{ $error }} <br/>
-              @endforeach
-            </div>
-            @endif
-      
-            <form action="/file/upload" method="POST" enctype="multipart/form-data">
-              {{ csrf_field() }}
-      
-              <div class="form-group">
-                <b>File</b><br/>
-                <input type="file" name="file">
-              </div>
-      
-              <div class="form-group">
-                <b>Keterangan</b>
-                <textarea class="form-control" name="keterangan"></textarea>
-              </div>
-      
-              <input type="submit" value="Upload" class="btn btn-primary">
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+@endauth
 @endsection

@@ -3,22 +3,22 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Admin;
-
 use App\Models\Folder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Folder extends Model
+class folder_user extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_folder','parent_id'];
-    
+    protected $fillable = [
+        'folders_id',
+        'users_id',
+        'isAllowed',
+    ];
     public function User(){
         return $this->belongsTo(User::class);
     }
-    public function folderUser(){
-        return $this->hasMany(folder_user::class);
+    public function folderuser(){
+        return $this->belongsTo(Folder::class);
     }
-
 }

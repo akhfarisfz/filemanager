@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\folder_user;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +41,7 @@ class RegisterController extends Controller
             'unitkerja'=>$request->unitkerja,
             'email'=>$request->email,
             'telepon'=>$request->telepon,
-            'role'=>'admin',
+            // 'role'=>'admin',
             'password'=>Hash::make($request->password),
             'picture'=>$picture
         ]);

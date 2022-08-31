@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\userManagement;
+use App\Models\User;
+use App\Models\folder_user;
+use App\Models\Folder;
 use Illuminate\Http\Request;
+use App\Models\userManagement;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class AdminUserManagementController extends Controller
 {
@@ -14,9 +19,17 @@ class AdminUserManagementController extends Controller
      */
     public function index()
     {
-        return view('Admin.Usermanagement');
+        $data_user= User::where('role','user')->get()->sortBy("id");
+        $data_folder=Folder::whereNotNull('parent_id')->get()->sortBy("name_folder");
+        $data_tahun=Folder::where('parent_id',null)->get()->sortBy("name_folder");
+        // dd($data_folder);
+            return view('Admin/Usermanagement',[
+                    'tittle'=>'User',
+                    'data_folder'=>$data_folder,
+                    'data_tahun'=>$data_tahun,
+                    'data_user'=> $data_user
+                ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *

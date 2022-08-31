@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('telepon', 60);
             $table->string('password', 60);
             $table->enum('role', ['user','admin'])->default('user');
-            // $table->rememberToken();
             $table->string('picture')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

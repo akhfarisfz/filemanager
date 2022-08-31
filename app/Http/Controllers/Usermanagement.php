@@ -9,8 +9,15 @@ use Illuminate\Routing\Controller;
 
 class Usermanagement extends Controller
 {
-    public function index(){
+    public function tampil(){
         $users = User::all();
-        // return $users->toArray();
+        $tampil = folder_user::table('tampil')
+        ->leftjoin('User', 'folder_user.users_id', '=', 'User.id')
+        ->leftjoin('Folder', 'folder_user.folders_id', '=', 'Folder.id')
+        // ->where('users.id', 3)
+        // ->where('shares.user_id', 'followers.follower_id'
+        ->get();
+        dd($tampil);
+        
     }
 }
