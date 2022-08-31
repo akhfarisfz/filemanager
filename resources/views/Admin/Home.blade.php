@@ -16,7 +16,7 @@
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="logout">
-    <a href="/adminlogout">
+    <a href="/logout">
         <button class="btn-dark"><i class="fa fa-arrow-right-from-bracket"></i>  Logout</button>
       </a>
 </div>
