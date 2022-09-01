@@ -2,15 +2,19 @@
 @section('container')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="nav">
-<a href="/admin/home">
-  <button class="btn-dark"><i class="fa fa-angle-left"></i>  Back</button>
-</a>
-    <a href="" data-toggle="modal" data-target="#myModal">
-      <div class="card-text-right" style="width: 17rem;">
-          <img src="/fluent_folder-add-48-filled.png" width="35px">
-      </div>
-      {{-- <h4>Upload File</h4> --}}
-    </a>
+  <a href="/admin/home">
+    <button class="btn-dark"><i class="fa fa-angle-left"></i>  Back</button>
+  </a>
+  <a href="" data-toggle="modal" data-target="#myModal">
+    <div class="card-text-right" style="width: 17rem;">
+        <img src="/fluent_folder-add-48-filled.png" width="35px">
+    </div>
+    {{-- <h4>Upload File</h4> --}}
+  </a>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Upload File
+  </button>
 </div>  
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -75,15 +79,15 @@
       </div>
       <form action="/managementfile/rename/{{ $folder['id'] }}" method="post">
         @csrf
-      <div class="modal-body">
-          <label for="nama_folder">Nama Folder</label>
-          <input type="text" name="nama_folder" class="form-control" id="nama_folder" required >
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-    </form>
+        <div class="modal-body">
+            <label for="nama_folder">Nama Folder</label>
+            <input type="text" name="nama_folder" class="form-control" id="nama_folder" required >
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -93,24 +97,68 @@
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th width = "1%">FILE</th>
+        <th width = "25%">FILE</th>
         <th>KETERANGAN</th>	
         <th width = "1%">OPSI</th>
       </tr>
     </thead>
     <tbody>
+      @foreach($files as $f)
       <tr>
-        <td>File</td>
-        <td>Keterangan</td>
+        <td>{{ ($f->file) }}</td>
+        <td>{{$f->keterangan}}</td>
         <td>
           <div class="btn-group" >
-            <a class="btn btn-danger" href=""><span>HAPUS</span></a>
-            <a class="btn btn-success" href=""><span>UNDUH</span></a>
+            <a class="btn btn-danger" href="/file/hapus/{{ $f->id }}"><span>HAPUS</span></a>
+            <a class="btn btn-success" href="/file/unduh/{{ $f->id }}"><span>UNDUH</span></a>
           </div>
         </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
+
+  <!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Upload Here</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body">
+				@if(count($errors) > 0)
+				<div class="alert alert-danger">
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br/>
+					@endforeach
+				</div>
+				@endif
+
+				<form action="/file/upload" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+
+					<div class="form-group">
+						<b>File</b><br/>
+						<input type="file" name="file">
+					</div>
+
+					<div class="form-group">
+						<b>Keterangan</b>
+						<textarea class="form-control" name="keterangan"></textarea>
+					</div>
+
+					<input type="submit" value="Upload" class="btn btn-primary">
+				</form>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+		</div>
+	</div>
 </div>
 
 <style>
