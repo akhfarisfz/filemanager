@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('folders_id')->nullable();
             $table->integer('users_id')->nullable();
-            $table->boolean('isAllowed')->default(1);
+            $table->boolean('isAllowed')->default(0);
             $table->timestamps();
         });
     } 

@@ -22,8 +22,6 @@ class LoginController extends Controller
             'password'=>'required'
         ]);
 
-        // dd($credentials);
-
         if (Auth::attempt($credentials) && Gate::allows('isAdmin')){
             $request->session()->regenerate();
             return redirect()->intended('/admin/home');

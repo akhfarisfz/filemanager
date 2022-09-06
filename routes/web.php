@@ -67,6 +67,11 @@ Route::get('/user/home', [UserController::class, 'index']);
 
 Route::get('/usermanagement',[AdminUserManagementController::class,'index']);
 
+Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
+
+Route::post('/ubahakses/{id_user}/update',[Usermanagement::class,'ubahakses']);
+
+
 
 Route::get('/managementfile',[FileManagementController::class,'index']);
 
@@ -76,10 +81,9 @@ Route::post('/managementfile/{parent_id?}',[FileManagementController::class,'tam
 Route::get('/managementfile/delete/{id}',[FileManagementController::class,'hapusfolder']);
 Route::post('/managementfile/rename/{id}',[FileManagementController::class,'rename']);
 
-Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
-// Route::resource('/admin/usermanagement', AdminUserManagementController::class,'akeses')->except('show')->middleware('auth');
-// Route::get('/admin/')
+
 Route::get('/logout',[HomeController::class,'logout'])->middleware('auth');
 
 Route :: get('/gate',[AuthorizationController::class,'index'])->name('gate.index')->middleware('can:isAdmin');
+
 

@@ -84,7 +84,6 @@
     </span>
 </div>
 @foreach ($data_akses as $folder)
-    
 <a href="/home/{{ $folder->id}}">  
 <div class="content"> 
         <img src="/image 4.png" width=45px>
@@ -93,7 +92,7 @@
     </div>
 </a>
 @endforeach
-<div class="data">
+{{-- <div class="data">
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -114,6 +113,6 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table> --}}
 @endauth
 @endsection

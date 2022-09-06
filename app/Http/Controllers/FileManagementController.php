@@ -28,16 +28,6 @@ class FileManagementController extends Controller
             'nama_folder'=>$request->nama_folder,
             'parent_id'=>$parent_id
         ]);
-        // $get_id_user=User::pluck('id');
-        // $get_id=Folder::where('nama_folder',$request->nama_folder)->pluck('id');
-        // foreach ($get_id as $folder ) {
-        //     foreach ($get_id_user as $user) {
-        //         folder_user::create([
-        //             'folders_id'=>$folder,
-        //             'users_id'=>$user, 
-        //         ]);
-        //     }
-        // }
         return back();
     }
     public function hapusfolder($id ){

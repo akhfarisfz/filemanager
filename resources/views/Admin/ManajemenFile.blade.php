@@ -88,7 +88,7 @@
   </div>
 </div>
 @endforeach
-
+{{-- 
 <div class="data">
   <table class="table table-bordered table-striped">
     <thead>
@@ -111,7 +111,7 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> --}}
 
 <style>
     .content{
