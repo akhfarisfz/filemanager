@@ -59,80 +59,101 @@
 </style>
 
 @section('container')
-<div class="Navbar">
-    <p>Drive</p>
-    <span>
-        @auth
-        @csrf
-        <div class="dropdown">
-            <a href=""> 
-                <span>Hello, {{ auth()->User()->nama_user }}</span>
-                <img src="/bxs_user-circle.png" width=40px>
-            </a>
-            <div class="dropdown-list">
-                <a href="/profil">Edit Profil</a>
-                <a href="/">Log out</a>
-            </div>
-        </div>
-        @endauth
-    </span>
-</div>
-<div class="row">
-	<div class="container">
-
-		<h2 class="text-center my-5">Upload File Here</h2>
-		
-		<div class="col-lg-8 mx-auto my-5">	
-
-			@if(count($errors) > 0)
-			<div class="alert alert-danger">
-				@foreach ($errors->all() as $error)
-				{{ $error }} <br/>
-				@endforeach
+	<div class="Navbar">
+		<p>Drive</p>
+		<span>
+			@auth
+			@csrf
+			<div class="dropdown">
+				<a href=""> 
+					<span>Hello, {{ auth()->User()->nama_user }}</span>
+					<img src="/bxs_user-circle.png" width=40px>
+				</a>
+				<div class="dropdown-list">
+					<a href="/profil">Edit Profil</a>
+					<a href="/">Log out</a>
+				</div>
 			</div>
-			@endif
-
-			<form action="/file/upload" method="POST" enctype="multipart/form-data">
-				{{ csrf_field() }}
-
-				<div class="form-group">
-					<b>File</b><br/>
-					<input type="file" name="file">
-				</div>
-
-				<div class="form-group">
-					<b>Keterangan</b>
-					<textarea class="form-control" name="keterangan"></textarea>
-				</div>
-
-				<input type="submit" value="Upload" class="btn btn-primary">
-			</form>
+			@endauth
+		</span>
+	</div>
+	<div class="row">
+		<div class="container">
 			
-			<h4 class="my-5">Data</h4>
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th width = "1%">FILE</th>
-						<th>KETERANGAN</th>	
-						<th width = "1%">OPSI</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($files as $f)
-					<tr>
-						<td>{{ ($f->file) }}</td>
-						<td>{{$f->keterangan}}</td>
-						<td>
-							<div class="btn-group" >
-								<a class="btn btn-danger" href="/file/hapus/{{ $f->id }}"><span>HAPUS</span></a>
-								<a class="btn btn-success" href="/file/unduh/{{ $f->id }}"><span>UNDUH</span></a>
-							</div>
-						</td>
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
+			<div class="col-lg-8 mx-auto my-5">	
+				<h4 class="my-5">Data</h4>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+				Upload File
+			</button>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th width = "25%">FILE</th>
+							<th>KETERANGAN</th>	
+							<th width = "1%">OPSI</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($files as $f)
+						<tr>
+							<td>{{ ($f->file) }}</td>
+							<td>{{$f->keterangan}}</td>
+							<td>
+								<div class="btn-group" >
+									<a class="btn btn-danger" href="/file/hapus/{{ $f->id }}"><span>HAPUS</span></a>
+									<a class="btn btn-success" href="/file/unduh/{{ $f->id }}"><span>UNDUH</span></a>
+								</div>
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-</div>
+
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Upload Here</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body">
+				@if(count($errors) > 0)
+				<div class="alert alert-danger">
+					@foreach ($errors->all() as $error)
+					{{ $error }} <br/>
+					@endforeach
+				</div>
+				@endif
+
+				<form action="/file/upload" method="POST" enctype="multipart/form-data">
+					{{ csrf_field() }}
+
+					<div class="form-group">
+						<b>File</b><br/>
+						<input type="file" name="file">
+					</div>
+
+					<div class="form-group">
+						<b>Keterangan</b>
+						<textarea class="form-control" name="keterangan"></textarea>
+					</div>
+
+					<input type="submit" value="Upload" class="btn btn-primary">
+				</form>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+		</div>
+	</div>
 @endsection
