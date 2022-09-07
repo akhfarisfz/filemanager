@@ -123,53 +123,7 @@
       @endforeach
     </tbody>
   </table>
-<<<<<<< HEAD
 </div> --}}
-=======
-
-  <!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Upload Here</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			</div>
-			<div class="modal-body">
-				@if(count($errors) > 0)
-				<div class="alert alert-danger">
-					@foreach ($errors->all() as $error)
-					{{ $error }} <br/>
-					@endforeach
-				</div>
-				@endif
-
-				<form action="/file/upload" method="POST" enctype="multipart/form-data">
-					{{ csrf_field() }}
-
-					<div class="form-group">
-						<b>File</b><br/>
-						<input type="file" name="file">
-					</div>
-
-					<div class="form-group">
-						<b>Keterangan</b>
-						<textarea class="form-control" name="keterangan"></textarea>
-					</div>
-
-					<input type="submit" value="Upload" class="btn btn-primary">
-				</form>
-			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-			</div>
-		</div>
-		</div>
-	</div>
-</div>
->>>>>>> ed56bb1c11a7490998ba310f82de14272775ffd8
 
 {{-- <script>
   $(document).ready(function(){
