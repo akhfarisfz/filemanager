@@ -6,7 +6,7 @@ use App\Models\Folder;
 use App\Models\User;
 use App\Models\folder_user;
 use App\Models\File;
-
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -43,7 +43,7 @@ class FileManagementController extends Controller
         // }
         return back();
     }
-    public function hapusfolder($id ){
+    public function hapusfolder($id){
         $tabel_folder=Folder::find($id);
         folder_user::where('folders_id',$id)->delete($id);
         $tabel_folder->delete($id);
@@ -79,5 +79,11 @@ class FileManagementController extends Controller
         ]);
     
         return redirect()->back();
+    }
+    public function getFolderData($id){
+        $where = array('id' => $id);
+        $folder = Folder::where($where)->first();
+
+        return response()->json($folder);
     }
 }

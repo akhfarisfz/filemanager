@@ -24,16 +24,14 @@ class FileController extends Controller
     
         $nama_file = $file->getClientOriginalName();
  
-      	// isi dengan nama folder tempat kemana file diupload
+      	// isi dengan nama folder tempat kemana file diupload 
         $tujuan_upload = 'data_file';
         $file->move($tujuan_upload,$nama_file);
-    
     
         File::create([
             'file' => $nama_file,
             'keterangan' => $request->keterangan,
         ]);
-    
         return redirect()->back();
     }
 

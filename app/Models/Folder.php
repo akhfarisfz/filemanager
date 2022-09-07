@@ -3,9 +3,6 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Admin;
-
-use App\Models\Folder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -20,5 +17,4 @@ class Folder extends Model
     public function folderUser(){
         return $this->hasMany(folder_user::class);
     }
-
 }

@@ -1,6 +1,10 @@
 @extends('Admin.Layout.index')
 @section('container')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
 <div class="nav">
   <a href="/admin/home">
     <button class="btn-dark"><i class="fa fa-angle-left"></i>  Back</button>
@@ -11,10 +15,12 @@
     </div>
     {{-- <h4>Upload File</h4> --}}
   </a>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Upload File
-  </button>
+  <div class="buttonModal">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="buttonModal">
+      Upload File
+    </button>
+  </div>
 </div>  
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -154,13 +160,28 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>
 		</div>
 	</div>
 </div>
 
+{{-- <script>
+  $(document).ready(function(){
+
+  })
+  $(document).ready(function(){
+    $.ajax({
+      
+    })
+    if($admin == null){
+      $('#buttonModal').hide();
+    }else{
+      $('#buttonModal').show();
+    }
+  });
+</script> --}}
 <style>
     .content{
         border-bottom: 1px solid gray;

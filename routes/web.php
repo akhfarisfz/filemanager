@@ -72,9 +72,11 @@ Route::get('/managementfile',[FileManagementController::class,'index']);
 
 Route::get('/managementfile/{parent_id?}',[FileManagementController::class,'index']);
 Route::post('/managementfile/{parent_id?}',[FileManagementController::class,'tambahfolder']);
+Route::get('/managementfile/{parent_id?}',[FileManagementController::class,'getFolderData']);
 
 Route::get('/managementfile/delete/{id}',[FileManagementController::class,'hapusfolder']);
 Route::post('/managementfile/rename/{id}',[FileManagementController::class,'rename']);
+
 
 Route::resource('/admin/usermanagement', AdminUserManagementController::class)->except('show')->middleware('auth');
 // Route::resource('/admin/usermanagement', AdminUserManagementController::class,'akeses')->except('show')->middleware('auth');
