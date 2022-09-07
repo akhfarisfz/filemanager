@@ -17,9 +17,10 @@ class AdminUserManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_user=null)
     {
         $data_user= User::where('role','user')->get()->sortBy("id");
+        // $data_user= User::where('role','user')->get()->sortBy("id");
         $data_folder=Folder::whereNotNull('parent_id')->get()->sortBy("name_folder");
         $data_tahun=Folder::where('parent_id',null)->get()->sortBy("name_folder");
         $data_akses = DB::table('folder_users')
