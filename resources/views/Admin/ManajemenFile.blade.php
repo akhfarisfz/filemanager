@@ -98,7 +98,7 @@
   </div>
 </div>
 @endforeach
-
+{{-- 
 <div class="data">
   <table class="table table-bordered table-striped">
     <thead>
@@ -123,6 +123,9 @@
       @endforeach
     </tbody>
   </table>
+<<<<<<< HEAD
+</div> --}}
+=======
 
   <!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -166,6 +169,7 @@
 		</div>
 	</div>
 </div>
+>>>>>>> ed56bb1c11a7490998ba310f82de14272775ffd8
 
 {{-- <script>
   $(document).ready(function(){

@@ -22,7 +22,7 @@ class HomeController extends Controller
               ->where('users.id',auth()->User()->id )
               ->where('isAllowed',1)
               ->get()->sortBy("nama_folder");
-// dd($tampil);
+              
         return view('Home',[
             'parent_id'=>$parent_id,
             'tittle'=>"Home",
