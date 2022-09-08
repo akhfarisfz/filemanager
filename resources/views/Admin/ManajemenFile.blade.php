@@ -1,10 +1,7 @@
 @extends('Admin.Layout.index')
 @section('container')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script
-  src="https://code.jquery.com/jquery-3.6.1.min.js"
-  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-  crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="nav">
   <a href="/admin/home">
     <button class="btn-dark"><i class="fa fa-angle-left"></i>  Back</button>
@@ -98,7 +95,7 @@
   </div>
 </div>
 @endforeach
-{{-- 
+
 <div class="data">
   <table class="table table-bordered table-striped">
     <thead>
@@ -123,23 +120,52 @@
       @endforeach
     </tbody>
   </table>
-</div> --}}
+</div>
+<!-- Modal Upload File-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Upload Here</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+      @if(count($errors) > 0)
+      <div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+        {{ $error }} <br/>
+        @endforeach
+      </div>
+      @endif
 
-{{-- <script>
-  $(document).ready(function(){
+      <form action="/file/upload" method="POST" enctype="multipart/form-data">
+        {{ csrf_field() }}
 
-  })
+        <div class="form-group">
+          <b>File</b><br/>
+          <input type="file" name="file">
+        </div>
+
+        <div class="form-group">
+          <b>Keterangan</b>
+          <textarea class="form-control" name="keterangan"></textarea>
+        </div>
+
+        <input type="submit" value="Upload" class="btn btn-primary">
+      </form>
+
+<script>
   $(document).ready(function(){
-    $.ajax({
-      
-    })
-    if($admin == null){
+    fetchRecord(0);
+    if(==null){
       $('#buttonModal').hide();
     }else{
       $('#buttonModal').show();
     }
-  });
-</script> --}}
+  })
+</script>
 <style>
     .content{
         border-bottom: 1px solid gray;

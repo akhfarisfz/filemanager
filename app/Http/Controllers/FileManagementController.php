@@ -70,10 +70,26 @@ class FileManagementController extends Controller
     
         return redirect()->back();
     }
-    public function getFolderData($id){
-        $where = array('id' => $id);
-        $folder = Folder::where($where)->first();
+    public function hapusFile($id){
+        $post = File::find($id);
+        $post->delete();
+        
+        return redirect()->back();
+    }
+    public function getFolderData($id=0){
+        if($id==0){ 
+            $folders = Folder::orderby('id','asc')->select('*')->get(); 
+         }else{   
+            $folders = Folder::select('*')->where('id', $id)->get(); 
+         }
+         // Fetch all records
+         $folderData['data'] = $folders;
+    
+         echo json_encode($folderData);
+         exit;
+        // $where = array('id' => $id);
+        // $folder = Folder::where($where)->first();
 
-        return response()->json($folder);
+        // return response()->json($folder);
     }
 }
